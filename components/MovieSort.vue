@@ -1,6 +1,6 @@
 <template>
     <div id="container">
-        <FilterPanelCard title="Sort">
+        <FilterPanelCard title="Sort" :closed="false">
             <div>
                 <h3>Sort Results By</h3>
             </div>

@@ -7,7 +7,7 @@
             <ChevronRightIcon v-if="isClosed"/>
             <ChevronDownIcon v-else/>
         </div>
-        <transition>
+        <transition name="filter">
             <div v-if="!isClosed" class="filter">
                 <slot />
             </div>
@@ -30,11 +30,15 @@ export default {
             type: String,
             required: true,
             default: 'Title'
+        },
+        closed: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
         return {
-            isClosed: true
+            isClosed: this.closed
         }
     }
 }
