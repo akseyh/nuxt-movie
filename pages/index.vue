@@ -1,11 +1,16 @@
 <template>
   <div id="container">
-    <div class="content">
+    <div class="field">
       <div class="title">
         <h2>Popüler Filmler</h2>
       </div>
-      <div>
-        MOBILE: {{$store.getters['mobileView']}}
+      <div class="content">
+        <MovieSort />
+        <div>
+          <div class="movies">
+            MOVIES
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -20,7 +25,7 @@
   align-items: flex-start
   align-content: flex-start
 
-.content 
+.field 
   width: 100vw
   max-width: 1300px
   display: flex
@@ -34,4 +39,14 @@
   margin-bottom: 20px
   font-size: 1.6rem
   font-weight: 600
+
+.content
+  width: 100%
+  display: flex
+  align-items: flex-start
+  align-content: flex-start
+
+.movies
+  margin-left: 30px
+  background: transparent
 </style>
