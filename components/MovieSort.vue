@@ -1,5 +1,5 @@
 <template>
-    <div id="container">
+    <div id="container" :class="{'mobile': mobileView}">
         <FilterPanelCard title="Sort" :closed="false">
             <div>
                 <h3>Sort Results By</h3>
@@ -28,6 +28,9 @@ export default {
         ChevronRightIcon,
         ChevronDownIcon
     },
+    computed: {
+        mobileView() { return this.$store.getters.mobileView }
+    },
     data() {
         return {
             isFilterSortClosed: true
@@ -39,6 +42,7 @@ export default {
 <style lang="sass" scoped>
 #container
     width: 260px
+    min-width: 260px
     display: flex
     justify-content: flex-start
     align-items: flex-start
@@ -64,6 +68,9 @@ export default {
         p
             font-weight: 600
             color: rgba(0,0,0,0.5)
+
+.mobile
+    width: 100% !important
 
         
 </style>

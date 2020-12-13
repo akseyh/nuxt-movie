@@ -47,7 +47,7 @@ export default {
 <style lang="sass" scoped>
 .filter_panel
     min-width: 260px
-    width: 260px
+    width: 100%
     border: 1px solid #e3e3e3
     border-radius: 8px
     display: flex
