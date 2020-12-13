@@ -1,31 +1,37 @@
 <template>
-  <div class="text-center">
-    <b class="title">NUXT MOVIE</b>
-    <div>
-      MOBILE: {{$store.getters['mobileView']}}
+  <div id="container">
+    <div class="content">
+      <div class="title">
+        <h2>Popüler Filmler</h2>
+      </div>
+      <div>
+        MOBILE: {{$store.getters['mobileView']}}
+      </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    handleView() {
-      this.$store.commit('updateWindowWidth')
-    }
-  },
-  created() {
-    this.handleView()
-    window.addEventListener('resize', this.handleView)
-  },
-  destroyed() {
-    window.removeEventListener('resize', this.handleView)
-  }
-}
-</script>
+<style lang="sass" scoped>
+#container
+  width: 100%
+  display: flex
+  justify-content: center
+  flex-wrap: wrap
+  align-items: flex-start
+  align-content: flex-start
 
-<style>
-.title {
-  font-size: 50px;
-}
+.content 
+  width: 100vw
+  max-width: 1300px
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  align-content: flex-start
+  padding: 30px 40px 30px 40px
+
+.title
+  width: 100%
+  margin-bottom: 20px
+  font-size: 1.6rem
+  font-weight: 600
 </style>

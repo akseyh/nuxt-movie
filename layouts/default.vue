@@ -5,6 +5,23 @@
   </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    handleView() {
+      this.$store.commit('updateWindowWidth')
+    }
+  },
+  created() {
+    this.handleView()
+    window.addEventListener('resize', this.handleView)
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleView)
+  }
+}
+</script>
+
 <style>
 html {
   font-family:
