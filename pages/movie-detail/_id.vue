@@ -1,5 +1,5 @@
 <template>
-    <div id="container">
+    <div id="container" v-if="!mobileView">
         <div class="header">
             <div class="custom_bg">
                 <div class="single_column">
@@ -55,10 +55,97 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+        <div class="details">
+            <div class="details_wrapper">
+                <div class="left">
+                    <div class="column">
+                        <h3>Top Billed Cast</h3>
+                        <div class="cast_scroller">
+                            <ol>
+                                <li>
+                                    <CastCard 
+                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
+                                        castName="Nicolas Cage"
+                                        characterName="Wylie"/>
+                                </li>
+                                <li>
+                                    <CastCard 
+                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
+                                        castName="Nicolas Cage"
+                                        characterName="Wylie"/>
+                                </li>
+                                <li>
+                                    <CastCard 
+                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
+                                        castName="Nicolas Cage"
+                                        characterName="Wylie"/>
+                                </li>
+                                <li>
+                                    <CastCard 
+                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
+                                        castName="Nicolas Cage"
+                                        characterName="Wylie"/>
+                                </li>
+                                <li>
+                                    <CastCard 
+                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
+                                        castName="Nicolas Cage"
+                                        characterName="Wylie"/>
+                                </li>
+                                <li>
+                                    <CastCard 
+                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
+                                        castName="Nicolas Cage"
+                                        characterName="Wylie"/>
+                                </li>
+                                <li>
+                                    <CastCard 
+                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
+                                        castName="Nicolas Cage"
+                                        characterName="Wylie"/>
+                                </li>
+                                <li>
+                                    <CastCard 
+                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
+                                        castName="Nicolas Cage"
+                                        characterName="Wylie"/>
+                                </li>
+                                <li>
+                                    <CastCard 
+                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
+                                        castName="Nicolas Cage"
+                                        characterName="Wylie"/>
+                                </li>
+                                <li>
+                                    <CastCard 
+                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
+                                        castName="Nicolas Cage"
+                                        characterName="Wylie"/>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <MovieInfo />
+                </div>
+            </div>
         </div>
     </div>
+    <div v-else>
+        MOBILE
+    </div>
 </template>
+
+<script>
+export default {
+    name: 'movie-detail',
+    computed: {
+        mobileView() { return this.$store.getters.mobileView }
+    }
+}
+</script>
 
 <style lang="sass" scoped>
 #container
@@ -197,6 +284,53 @@
                                 margin-top: 10px
                                 font-weight: 600
                                 font-size: 1.3em
-                            
+    .details
+        width: 100%
+        display: flex
+        align-items: center
+        justify-content: center
+        .details_wrapper
+            max-width: 1300px
+            width: 100vw
+            display: flex
+            align-items: flex-start
+            align-content: flex-start
+            padding-left: 40px
+            padding-right: 40px
+            padding-top: 30px
+            padding-bottom: 30px
+            .left 
+                .column
+                    background-color: #fff
+                    max-width: 960px
+                    width: calc(100vw - 80px - 260px)
+                    display: flex
+                    flex-direction: column
+                    flex-wrap: wrap
+                    flex: 0 1 auto
+                    padding-right: 30px
+                    h3
+                        font-weight: 600
+                        font-size: 1.4em
+                        margin-bottom: 20px
+                    .cast_scroller
+                        position: relative
+                        top: 0
+                        left: 0
+                        width: 100%
+                        ol
+                            width: 100%
+                            overflow-y: hidden
+                            overflow-x: scroll
+                            margin-left: -10px
+                            margin-top: -10px
+                            list-style-type: none
+                            list-style-position: inside
+                            margin: 0
+                            padding: 0
+                            display: flex
+                            position: relative
+                            top: 0
+                            left: 0
                             
 </style>
