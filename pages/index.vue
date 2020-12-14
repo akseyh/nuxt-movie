@@ -7,56 +7,16 @@
       <div class="content">
         <MovieSort />
         <div class="movies">
-          <NuxtLink to="/movie-detail/12341234">
+          <NuxtLink 
+            v-for="movie in topRatedMovies" 
+            :key="movie.id"
+            :to="`/movie-detail/${movie.id}`">
             <MovieCard 
-              movieName="Jiu Jitsu"
-              userScore="58"
-              :releaseDate="new Date(2020, 10, 20)"
-              image="/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg"/>
+              :movieName="movie.title"
+              :userScore="movie.popularity"
+              :releaseDate="movie.release_date"
+              :image="movie.poster_path"/>
           </NuxtLink>
-          <NuxtLink to="/movie-detail/12341234">
-            <MovieCard 
-              movieName="Jiu Jitsu"
-              userScore="58"
-              :releaseDate="new Date(2020, 10, 20)"
-              image="/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg"/>
-          </NuxtLink>
-          <NuxtLink to="/movie-detail/12341234">
-            <MovieCard 
-              movieName="Jiu Jitsu"
-              userScore="58"
-              :releaseDate="new Date(2020, 10, 20)"
-              image="/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg"/>
-          </NuxtLink>
-          <NuxtLink to="/movie-detail/12341234">
-            <MovieCard 
-              movieName="Jiu Jitsu"
-              userScore="58"
-              :releaseDate="new Date(2020, 10, 20)"
-              image="/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg"/>
-          </NuxtLink>
-          <NuxtLink to="/movie-detail/12341234">
-            <MovieCard 
-              movieName="Jiu Jitsu"
-              userScore="58"
-              :releaseDate="new Date(2020, 10, 20)"
-              image="/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg"/>
-          </NuxtLink>
-          <NuxtLink to="/movie-detail/12341234">
-            <MovieCard 
-              movieName="Jiu Jitsu"
-              userScore="58"
-              :releaseDate="new Date(2020, 10, 20)"
-              image="/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg"/>
-          </NuxtLink>
-          <NuxtLink to="/movie-detail/12341234">
-            <MovieCard 
-              movieName="Jiu Jitsu"
-              userScore="58"
-              :releaseDate="new Date(2020, 10, 20)"
-              image="/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg"/>
-          </NuxtLink>
-          
         </div>
       </div>
     </div>
@@ -64,10 +24,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Home',
   computed: {
-    mobileView() { return this.$store.getters.mobileView }
+    mobileView() { return this.$store.getters.mobileView },
+    ...mapState('movies', [
+      'topRatedMovies'
+    ])
+  },
+  created() {
+    this.$store.dispatch('movies/FETCH_TOP_RATED_MOVIES')
   }
 }
 </script>
