@@ -11,7 +11,7 @@
         <div class="content">
             <div class="point">
                 <div class="user_score">
-                    <p>{{userScore}}<span>%</span></p>
+                    <p>{{parseInt(userScore)}}<span>%</span></p>
                 </div>
             </div>
             <h2>{{movieName}}</h2>
@@ -52,11 +52,11 @@ export default {
             default: 'Movie Name'
         },
         userScore: {
-            type: String,
+            type: Number,
             default: -1
         },
         releaseDate: {
-            type: Date,
+            type: String,
             default: new Date()
         },
         image: {
@@ -79,8 +79,8 @@ export default {
     },
     methods: {
         dateFormat(date) {
-            date = new Date(date)
-            return `${this.monthName[date.getMonth()]} ${date.getDate()},${date.getFullYear()}`
+            const [year, month, day] = date.split('-')
+            return `${this.monthName[month - 1]} ${day}, ${year}`
         }
     }
 }
