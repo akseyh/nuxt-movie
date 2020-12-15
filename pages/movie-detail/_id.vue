@@ -1,12 +1,12 @@
 <template>
     <div id="container" v-if="!mobileView">
-        <div class="header">
+        <div class="header" :style="`background-image: url(//image.tmdb.org/t/p/w1920_and_h800_multi_faces/${selectedMovie.backdrop_path})`">
             <div class="custom_bg">
                 <div class="single_column">
                     <div class="poster_wrapper">
                         <div class="poster">
                             <div class="image_content">
-                                <img src="http://image.tmdb.org/t/p/w300_and_h450_bestv2/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg">
+                                <img :src="`http://image.tmdb.org/t/p/w300_and_h450_bestv2/${selectedMovie.poster_path}`">
                             </div>
                         </div>
                         <div class="ott_offer">
@@ -29,12 +29,12 @@
                     <div class="header_poster_wrapper">
                         <div class="header_content">
                             <div class="header_content_title">
-                                <h2>Jiu Jitsu<span>(2020)</span></h2>
+                                <h2>{{selectedMovie.title}}<span> ({{selectedMovie.release_date ? selectedMovie.release_date.split('-')[0] : ''}})</span></h2>
                                 <div class="facts">
                                     <span class="certification">R</span>
-                                    <span class="release">11/20/2020 (US) - </span>
+                                    <span class="release">{{dateFormat(selectedMovie.release_date)}} - </span>
                                     <span class="genres">&nbspAction, Fantasy, Science, Fiction - </span>
-                                    <span class="runtime">&nbsp1h 42m</span>
+                                    <span class="runtime">&nbsp{{calcRunTime(selectedMovie.runtime)}}</span>
                                 </div>
                             </div>
                             <ul class="actions">
@@ -45,11 +45,9 @@
                                 <li>asfdasd</li>
                             </ul>
                             <div class="header_info">
-                                <h3 class="tagline">From the darkness, the ultimate fighter rises.</h3>
+                                <h3 class="tagline">{{selectedMovie.tagline}}</h3>
                                 <h3>Overview</h3>
-                                <div class="overview">
-                                    Every six years, an ancient order of jiu-jitsu fighters joins forces to battle a vicious race of alien invaders. But when a celebrated war hero goes down in defeat, the fate of the planet and mankind hangs in the balance.
-                                </div>
+                                <div class="overview">{{selectedMovie.overview}}</div>
                             </div>
                         </div>
                     </div>
@@ -63,61 +61,7 @@
                         <h3>Top Billed Cast</h3>
                         <div class="cast_scroller">
                             <ol>
-                                <li>
-                                    <CastCard 
-                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
-                                        castName="Nicolas Cage"
-                                        characterName="Wylie"/>
-                                </li>
-                                <li>
-                                    <CastCard 
-                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
-                                        castName="Nicolas Cage"
-                                        characterName="Wylie"/>
-                                </li>
-                                <li>
-                                    <CastCard 
-                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
-                                        castName="Nicolas Cage"
-                                        characterName="Wylie"/>
-                                </li>
-                                <li>
-                                    <CastCard 
-                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
-                                        castName="Nicolas Cage"
-                                        characterName="Wylie"/>
-                                </li>
-                                <li>
-                                    <CastCard 
-                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
-                                        castName="Nicolas Cage"
-                                        characterName="Wylie"/>
-                                </li>
-                                <li>
-                                    <CastCard 
-                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
-                                        castName="Nicolas Cage"
-                                        characterName="Wylie"/>
-                                </li>
-                                <li>
-                                    <CastCard 
-                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
-                                        castName="Nicolas Cage"
-                                        characterName="Wylie"/>
-                                </li>
-                                <li>
-                                    <CastCard 
-                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
-                                        castName="Nicolas Cage"
-                                        characterName="Wylie"/>
-                                </li>
-                                <li>
-                                    <CastCard 
-                                        imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
-                                        castName="Nicolas Cage"
-                                        characterName="Wylie"/>
-                                </li>
-                                <li>
+                                <li v-for="cast in 12" :key="cast.id">
                                     <CastCard 
                                         imageLink="https://image.tmdb.org/t/p/w600_and_h900_bestv2/2RMV9JvFN8KZ4CrikO1BIJYYPwa.jpg"
                                         castName="Nicolas Cage"
@@ -128,21 +72,52 @@
                     </div>
                 </div>
                 <div class="right">
-                    <MovieInfo />
+                    <MovieInfo 
+                        :status="selectedMovie.status"
+                        :original_language="selectedMovie.original_language"
+                        :budget="selectedMovie.budget"
+                        :revenue="selectedMovie.revenue"/>
                 </div>
             </div>
         </div>
     </div>
-    <div v-else>
-        MOBILE
+    <div v-else id="container-mobile">
+        <div class="customer_bg">
+            MOBILE
+        </div>
     </div>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
     name: 'movie-detail',
     computed: {
-        mobileView() { return this.$store.getters.mobileView }
+        mobileView() { return this.$store.getters.mobileView },
+        ...mapState('movies', [
+            'selectedMovie'
+        ])
+    },
+    methods: {
+        dateFormat(date) {
+            if(!date) return ''
+            const [year, month, day] = date.split('-')
+            return `${month}/${day}/${year}`
+        },
+        calcRunTime(min) {
+            if(!min) return ''
+            let hour = parseInt(min / 60)
+            let minutes = parseInt(min % 60)
+            if(hour <= 0) return `${minutes}m`
+            else if(minutes <= 0) return `${hour}h`
+            else return `${hour}h ${minutes}m`
+        }
+    },
+    created() {
+        this.$store.dispatch('movies/FETCH_MOVIE_DETAILS', this.$route.params.id)
+    },
+    destroyed() {
+        this.$store.commit('movies/setSelectedMovie', {})
     }
 }
 </script>
@@ -159,7 +134,6 @@ export default {
         background-position: right -200px top
         background-size: cover
         background-repeat: no-repeat
-        background-image: url(//image.tmdb.org/t/p/w1920_and_h800_multi_faces/jeAQdDX9nguP6YOX6QSWKDPkbBo.jpg)
         .custom_bg
             background-image: linear-gradient(to right, rgba(7.45%, 14.51%, 18.04%, 1.00) 150px, rgba(7.45%, 14.51%, 18.04%, 0.84) 100%)
             height: 100%
@@ -332,5 +306,15 @@ export default {
                             position: relative
                             top: 0
                             left: 0
-                            
+
+#container-mobile
+    width: 100%
+    position: relative
+    z-index: 1
+    border-bottom: 1px solid grey
+    background: linear-gradient(to bottom right, rgba(7.45%, 14.51%, 18.04%, 1.00), rgba(7.45%, 14.51%, 18.04%, 0.84))
+    .customer_bg
+        display: flex
+        justify-content: center
+        flex-wrap: wrap
 </style>

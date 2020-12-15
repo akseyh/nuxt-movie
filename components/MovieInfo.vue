@@ -2,19 +2,19 @@
     <div id="container">
         <div class="info">
             <span class="title">Status</span>
-            <span>Released</span>
+            <span>{{status}}</span>
         </div>
         <div class="info">
             <span class="title">Original Language</span>
-            <span>English</span>
+            <span>{{original_language}}</span>
         </div>
         <div class="info">
             <span class="title">Budget</span>
-            <span>$23,000,000.00</span>
+            <span>${{parseFloat(budget).toLocaleString('en-US')}}</span>
         </div>
         <div class="info">
             <span class="title">Revenue</span>
-            <span>$74,000,000.00</span>
+            <span>${{parseFloat(revenue).toLocaleString('en-US')}}</span>
         </div>
         <div class="info">
             <span class="title">Keywords</span>
@@ -22,6 +22,28 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    name: 'movie-info',
+    props: {
+        status: {
+            type: String
+        },
+        original_language: {
+            type: String
+        },
+        budget: {
+            type: Number,
+            default: 0
+        },
+        revenue: {
+            type: Number,
+            default: 0
+        }
+    }
+}
+</script>
 
 <style lang="sass" scoped>
 #container
