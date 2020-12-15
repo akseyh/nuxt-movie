@@ -1,7 +1,8 @@
-# nuxt-movie
+# NUXT-MOVIE
 
-## Build Setup
+> This repository is my nuxt learning project. I used nuxt, sass and [themoviedb API](https://developers.themoviedb.org/3)
 
+## BUILD SETUP
 ```bash
 # install dependencies
 $ yarn install
@@ -12,9 +13,9 @@ $ yarn dev
 # build for production and launch server
 $ yarn build
 $ yarn start
-
-# generate static project
-$ yarn generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## ENVIRONMENT VARIABLES
+| Name      | Description |
+| ----------- | ----------- |
+| API_KEY      | The API key for use [themoviedb API](https://developers.themoviedb.org/3). You can review https://developers.themoviedb.org/3/authentication      |
