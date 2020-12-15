@@ -1,6 +1,6 @@
 <template>
     <div id="container" v-if="!mobileView">
-        <div class="header" :style="`background-image: url(//image.tmdb.org/t/p/w1920_and_h800_multi_faces/${selectedMovie.backdrop_path})`">
+        <div class="header" :style="`background-image: url(http://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${selectedMovie.backdrop_path})`">
             <div class="custom_bg">
                 <div class="single_column">
                     <div class="poster_wrapper">
@@ -29,7 +29,7 @@
                     <div class="header_poster_wrapper">
                         <div class="header_content">
                             <div class="header_content_title">
-                                <h2>{{selectedMovie.title}}<span> ({{selectedMovie.release_date ? selectedMovie.release_date.split('-')[0] : ''}})</span></h2>
+                                <h2>{{selectedMovie.title}}<span> ({{selectedMovie.release_date ? selectedMovie.release_date.split('-')[0] : '-'}})</span></h2>
                                 <div class="facts">
                                     <span class="certification">R</span>
                                     <span class="release">{{dateFormat(selectedMovie.release_date)}} - </span>
@@ -38,11 +38,6 @@
                                 </div>
                             </div>
                             <ul class="actions">
-                                <li>Chart</li>
-                                <li>asfd</li>
-                                <li>afs</li>
-                                <li>asfd</li>
-                                <li>asfdasd</li>
                             </ul>
                             <div class="header_info">
                                 <h3 class="tagline">{{selectedMovie.tagline}}</h3>
@@ -83,7 +78,39 @@
     </div>
     <div v-else id="container-mobile">
         <div class="customer_bg">
-            MOBILE
+            <div class="poster_wrapper">
+                <div class="image_content" :style="`background-image: url(http://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${selectedMovie.backdrop_path})`">
+                    <img class="poster" :src="`http://image.tmdb.org/t/p/w300_and_h450_bestv2/${selectedMovie.poster_path}`">
+                </div>
+            </div>
+            <div class="header_poster_wrapper">
+                <div class="title">
+                    <div class="header">
+                        <span class="flex items-center"><h2>{{selectedMovie.title}}</h2>&nbsp({{selectedMovie.release_date ? selectedMovie.release_date.split('-')[0] : ''}})</span>
+                    </div>
+                    <div class="second_header">
+                        <ul class="flex">
+                        </ul>
+                    </div>
+                    <div class="genre_wrapper">
+                        <div class="facts">
+                            <div>
+                                <span class="certification">R</span>
+                                <span class="release">{{dateFormat(selectedMovie.release_date)}} - </span>
+                                <span class="runtime">&nbsp{{calcRunTime(selectedMovie.runtime)}}</span>
+                            </div>
+                            <span class="genres">Action, Fantasy, Science, Fiction </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header_info">
+                    <h3 class="header_tagline">{{selectedMovie.tagline}}</h3>
+                    <h3 class="title">Overview</h3>
+                    <div class="overview">
+                        <p>{{selectedMovie.overview}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -317,4 +344,95 @@ export default {
         display: flex
         justify-content: center
         flex-wrap: wrap
+        .poster_wrapper
+            box-shadow: none
+            width: 100%
+            height: auto
+            min-width: 100%
+            min-height: auto
+            .image_content
+                background-image: url(//image.tmdb.org/t/p/w1000_and_h450_multi_faces/jeAQdDX9nguP6YOX6QSWKDPkbBo.jpg)
+                background-size: cover
+                background-repeat: no-repeat
+                width: 100%
+                min-width: 100%
+                height: 100%
+                z-index: 4
+                .poster
+                    border: 20px solid transparent
+                    width: 122px
+                    min-width: 122px
+                    height: auto
+                    min-height: 100px
+                    border-radius: 8px
+        .header_poster_wrapper
+            width: 100%
+            max-width: 100%
+            .header
+                width: 100%
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-wrap: wrap
+                box-sizing: border-box
+                padding: 16px 20px
+                color: #fff
+                h2
+                    font-size: calc(0.7em + 3vw)
+                    font-weight: 600
+            .second_header
+                width: 100%
+                color: #fff
+                min-height: auto
+                padding: 0 20px 16px 20px
+                box-sizing: border-box
+                display: flex
+                align-items: center
+                justify-content: space-around
+            .genre_wrapper
+                width: 100%
+                color: #fff
+                display: flex
+                justify-content: center
+                align-content: center
+                align-items: center
+                background-color: rgba(0,0,0,0.1)
+                border-top: 1px solid rgba(0,0,0,0.2)
+                border-bottom: 1px solid rgba(0,0,0,0.2)
+                padding: 10px
+                z-index: 0
+                .facts
+                    display: flex
+                    flex-direction: column
+                    justify-content: center
+                    align-items: center
+                    .certification
+                        border: 1px solid rgba(255,255,255,0.6)
+                        color: rgba(255,255,255,0.6)
+                        display: inline-flex
+                        white-space: nowrap
+                        align-items: center
+                        align-content: center
+                        padding: 0.06em 4px 0.15em 4px !important
+                        border: 1px solid rgba(255,255,255,0.6)
+                        line-height: 1
+                        border-radius: 2px
+                        margin-right: 7px
+        .header_info
+            padding: 20px
+            color: #fff
+            .header_tagline
+                margin-bottom: 0
+                font-size: 1.1em
+                font-weight: 400
+                font-style: italic
+                opacity: 0.7
+            .title
+                font-weight: 600
+                margin: 10px 0 8px 0
+                font-size: 1.3em
+                .overview
+                    p
+                        margin-bottom: 30px 
+
 </style>
